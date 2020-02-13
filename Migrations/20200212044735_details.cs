@@ -2,7 +2,7 @@
 
 namespace Firstapiii.Migrations
 {
-    public partial class reuslt : Migration
+    public partial class details : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +12,7 @@ namespace Firstapiii.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Categoryname = table.Column<string>(maxLength: 100, nullable: true),
+                    Categoryname = table.Column<string>(nullable: true),
                     Categorydetails = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

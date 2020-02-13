@@ -1,10 +1,7 @@
-﻿using System;
+﻿using Firstapiii.entities;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Firstapiii.entity;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Firstapiii.Controllers
 {
@@ -32,9 +29,73 @@ namespace Firstapiii.Controllers
             Category category = new Category();
             category.Categoryname = "vegetarian";
             category.Categorydetails = "pureveg";
-            categorydbcontext.Add(category);
+
+            category.Categoryname = "nonveg";
+            category.Categorydetails = "purenonveg";
+            categorydbcontext.Categories.Add(category);
             categorydbcontext.SaveChanges();
             return "adddetails";
         }
+        [Route("GeTALLDETAILS")]
+        [HttpGet]
+        public List<Category> getdetails()
+        {
+            Categorydbcontext categorydbcontext = new Categorydbcontext();
+            return categorydbcontext.Categories.ToList();
+        }
+        [Route("GeTdetailsbyid")]
+        [HttpGet]
+        public List<Category> getdetailsbyid(int Id)
+        {
+            Categorydbcontext categorydbcontext = new Categorydbcontext();
+            return categorydbcontext.Categories.Where(i=> i.Id ==Id).ToList();
+        }
+
+        [Route("update")]
+        [HttpPut]
+        public string updatedetails(int Id, Category obj)
+        {
+            Categorydbcontext categorydbcontext = new Categorydbcontext();
+            var ab = categorydbcontext.Categories.Where(i => i.Id == Id).FirstOrDefault();
+            ab.Categoryname = obj.Categoryname;
+            ab.Categorydetails = obj.Categorydetails;
+            categorydbcontext.SaveChanges();
+            return "updated";
+        }
+        [Route("delete")]
+        [HttpDelete]
+        public string delete(int Id)
+        {
+            Categorydbcontext categorydbcontext = new Categorydbcontext();
+            var ab = categorydbcontext.Categories.Where(i => i.Id == Id).FirstOrDefault();
+            categorydbcontext.Categories.Remove(ab);
+            categorydbcontext.SaveChanges();
+            return "deleted";
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

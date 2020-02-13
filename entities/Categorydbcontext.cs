@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Firstapiii.entity
+namespace Firstapiii.entities
 {
-    public class Categorydbcontext : DbContext
+    public class Categorydbcontext:DbContext
     {
-        public virtual DbSet<Category> Categories{get; set;}
+        public virtual DbSet<Category> Categories { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"data source=DESKTOP-3SPT87U\SQLEXPRESS;initial catalog=Category;integrated security=True;");
@@ -16,9 +16,6 @@ namespace Firstapiii.entity
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Categorymapping());
-
         }
-
-
     }
 }
